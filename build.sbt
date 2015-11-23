@@ -34,18 +34,10 @@ buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion)
 
 buildInfoPackage := "code"
 
-seq(closureSettings:_*)
-
-(ClosureKeys.prettyPrint in (Compile, ClosureKeys.closure)) := false
-
 seq(webSettings :_*)
 
 // add managed resources, where less and closure publish to, to the webapp
 (webappResources in Compile) <+= (resourceManaged in Compile)
-
-(sourceDirectory in (Compile, ClosureKeys.closure)) <<= (sourceDirectory in Compile)(_ / "webapp" / "media" / "js")
-
-(resourceManaged in (Compile, ClosureKeys.closure)) <<= (crossTarget in Compile)(_ / "resource_managed" / "main" / "media" / "js")
 
 // If using JRebel uncomment next line
 scanDirectories := Nil
